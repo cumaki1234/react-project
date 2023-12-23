@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  /* NavBar.css */
+  .navbar {
+    
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ca0101;
+    color: white;
+    padding: 10px;
+    z-index: 1000; /* Asegura que la navbar esté por encima de otros elementos */
+  
+  }
+  
+  
+  .logo {
+    width: 40px;
+    height: auto;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    overflow: hidden; /* Asegura que la imagen se recorte correctamente */
+    display: block;
+  
+  }
+  
+  .company-name {
+    flex: 1; /* El nombre de la empresa ocupará el espacio restante */
+    margin-left: 10px;
+    font-size: 16px; /* Ajusta el tamaño del texto según tus necesidades */
+    font-family: 'Arial', sans-serif; /* Utiliza la misma fuente que en el nombre de la empresa */
+  
+  }
+  .menu-items {
+    display: flex;
+  }
+  .menu-button ,.whatsapp-button {
+    background-color: #ca0101; /* Ajusta el color del botón según tus preferencias */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Espaciado entre los elementos */
+  
+  }
+  
+  .whatsapp-icon {
+    width: 20px; 
+    font-size: 25px;
+
+    color: #2af218; 
+
+  }
+  .user-icon{
+    width: 20px; 
+    font-size: 20px; /* Ajusta el tamaño del icono según tus preferencias */
+
+  }
+  .bell-icon{
+    width: 20px; 
+    font-size: 20px; /* Ajusta el tamaño del icono según tus preferencias */
+
+  }
+  .cart-icon{
+    width: 20px; 
+    font-size: 20px; /* Ajusta el tamaño del icono según tus preferencias */
+
+  }
