@@ -2,8 +2,7 @@
 import Navbar from './components/NavBar';
 import BottomBar from './components/BottomBar';
 import RegistroUser from './components/RegistroUser';
-import Carousel from './components/ruleta';
-
+import Map from './components/Map';
 
 function App() {
  
@@ -11,8 +10,8 @@ function App() {
   return (
     <div>
     <Navbar />
-    
-    <RegistroUser/>
+    <Map/>
+    {/*<RegistroUser/>*/}
     <BottomBar />
   </div>
     
