@@ -1,0 +1,45 @@
+/* Sidebar.css */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Ajusta según la altura de tu Navbar */
+    bottom: 0;
+    width: 200px;
+    background-color: #570a0a; /* Cambié el color de fondo a rojo */
+    color: white;
+    padding: 20px;
+    z-index: 899; /* Asegura que el Sidebar esté por encima del contenido principal */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+/* Estilo para el contenedor de la barra lateral */
+.sidebar-container {
+    padding-right: 20px; /* Añade padding a la derecha para evitar que la línea toque el borde derecho del sidebar */
+}
+
+.sidebar-divider {
+    border-top: 1px solid white; /* Define el estilo de la línea divisoria */
+    margin: 5px -20px; /* Ajusta el margen para que la línea se extienda completamente hacia la izquierda y derecha */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 16px;
+    padding: 15px; /* Ajusta el padding para ampliar la zona sensible al pasar el cursor */
+    transition: background-color 0.3s ease; /* Agrega una transición suave al cambiar el color de fondo */
+    color: white !important; /* Asegura que el color del texto siempre sea blanco */
+}
+
+.sidebar a:hover {
+    background-color: rgba(51, 5, 5, 0.788); /* Cambia el color de fondo al pasar el cursor */
+    color: #ffffff; /* Cambia el color del texto al pasar el cursor */
+    color: #ffffff !important; /* Asegura que el color del texto sea blanco al pasar el cursor */
+}
+
+.sidebar a:visited {
+    color: #ffffff; /* Asegura que el color del texto no cambie después de visitar el enlace */
+    color: #ffffff !important; /* Asegura que el color del texto sea blanco después de visitar el enlace */
+}

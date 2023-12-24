@@ -4,20 +4,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 
 .form-container {
-  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 15px;
+  width: 250px;
   background-color: #f0f0f0;
-  padding: 20px;
+  padding: 0px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 14px; /* Ajusta este valor según sea necesario */
 }
 
 input {
