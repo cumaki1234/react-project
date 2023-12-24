@@ -5,7 +5,7 @@ body {
 
 /* NavBar.css */
 .navbar {
-  position: fixed;
+
   top: 0;
   left: 0;
   width: 100%;
@@ -19,6 +19,7 @@ body {
   z-index: 1000;
   /* Asegura que la navbar esté por encima de otros elementos */
 }
+
 
 
 
@@ -47,6 +48,10 @@ body {
 
 .menu-items {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  transition: transform 0.3s ease-in-out;
 }
 
 .menu-button,
@@ -92,3 +97,48 @@ body {
   /* Ajusta el tamaño del icono según tus preferencias */
 
 }
+
+.menu-button {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-visible {
+  transform: translateX(0%);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .menu-items {
+    position: absolute;
+    top: 60px; /* Adjust as needed */
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+    z-index: 1;
+    transform: translateX(-100%);
+  }
+
+  .menu-button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-visible {
+    transform: translateX(0%);
+  }

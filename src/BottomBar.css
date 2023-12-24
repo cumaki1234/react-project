@@ -1,18 +1,23 @@
 /* BottomBar.css */
 
 .bottom-bar {
-  position: fixed;
-  bottom: 0;
+
+ 
+
+ position: fixed;
+  bottom: 0px;
   left: 0;
-  width: 100%;
+
+  width: 100vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #ca0101;
   color: white;
-  height: 60px;
   z-index: 900;
-  /* Asegura que la navbar esté por encima de otros elementos */
+ 
+  
+
 }
 
 .bottom-bar-item {
@@ -60,16 +65,18 @@
   border-radius: 50%;
   /* Hace que el fondo sea un círculo */
 
-  /*padding: 1px;*/
+  /*padding: -1px;*/
   color: white;
   /* Color del icono */
   border: none;
   /* Elimina el borde */
   background-size: 200% 200%;
   /* Ajusta el tamaño del degradado (puedes cambiar los valores según tus necesidades) */
-
+  transition: background-position 0.5s;
 }
-
+.social-icon.instagram:hover {
+  background-position: right bottom;
+}
 .social-icon.facebook {
   color: #1877f2;
   /* Color de Facebook */

@@ -5,7 +5,7 @@ import '../BottomBar.css';
 
 const BottomBar = () => {
     return (
-      <nav className="bottom-bar">
+      <div className="bottom-bar">
         <a href="/map" className="bottom-bar-item">
         
         <FontAwesomeIcon icon={faMapMarkerAlt} />
@@ -29,7 +29,7 @@ const BottomBar = () => {
       </div>
       <div className='RedesSocial'>Redes sociales</div>
       </div>
-      </nav>
+      </div>
     );
   }
   
