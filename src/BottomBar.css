@@ -1,67 +1,76 @@
 /* BottomBar.css */
 
 .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #ca0101;
-    color: white;
-    height: 60px;
-  }
-  
-  .bottom-bar-item {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ca0101;
+  color: white;
+  height: 60px;
+  z-index: 900;
+  /* Asegura que la navbar esté por encima de otros elementos */
+}
+
+.bottom-bar-item {
+  display: flex;
+  flex-direction: column;
+  /* Coloca los elementos en una columna */
+  align-items: center;
+  /* Alinea los elementos al centro */
+  text-decoration: none;
+  color: #ffffff;
+  /* Color de texto predeterminado */
+  font-family: 'Arial', sans-serif;
+
+}
+
+.Redes {
+  display: flex;
+  flex-direction: column;
+  /* Coloca los elementos en una columna */
+  align-items: center;
+  /* Alinea los elementos al centro */
+
+}
+
+.RedesSocial {
+  margin-right: 10px;
+  /* Agrega espacio entre el texto "Redes sociales" y los íconos */
+  font-family: 'Arial', sans-serif;
+}
+
+.social-icons-container {
+  display: flex;
+}
+
+.social-icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.social-icon.instagram {
 
 
+  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+  /* Degradado de colores de Instagram */
+  border-radius: 50%;
+  /* Hace que el fondo sea un círculo */
 
-    display: flex;
-    flex-direction: column; /* Coloca los elementos en una columna */
-    align-items: center; /* Alinea los elementos al centro */
-    text-decoration: none;
-    color: #ffffff; /* Color de texto predeterminado */
-    font-family: 'Arial', sans-serif; 
+  /*padding: 1px;*/
+  color: white;
+  /* Color del icono */
+  border: none;
+  /* Elimina el borde */
+  background-size: 200% 200%;
+  /* Ajusta el tamaño del degradado (puedes cambiar los valores según tus necesidades) */
 
-  }
-  .Redes{
-    display: flex;
-    flex-direction: column; /* Coloca los elementos en una columna */
-    align-items: center; /* Alinea los elementos al centro */
+}
 
-  }
-  .RedesSocial{
-    margin-right: 10px; /* Agrega espacio entre el texto "Redes sociales" y los íconos */
-    font-family: 'Arial', sans-serif; 
-  }
-  .social-icons-container {
-    display: flex;
-  }
-  .Redes p {
-   
-
-  }
-  .social-icon {
-    margin-right: 10px;
-    font-size: 24px; 
-    
-
-  }
-  
-  .social-icon.instagram {
-
-   
-  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); /* Degradado de colores de Instagram */
-  border-radius: 50%; /* Hace que el fondo sea un círculo */
-
-    /*padding: 1px;*/ 
-    color: white; /* Color del icono */
-   border: none; /* Elimina el borde */
-   background-size: 200% 200%; /* Ajusta el tamaño del degradado (puedes cambiar los valores según tus necesidades) */
-
-  }
-  
-  .social-icon.facebook {
-    color: #1877f2; /* Color de Facebook */
-  }
+.social-icon.facebook {
+  color: #1877f2;
+  /* Color de Facebook */
+}

@@ -1,0 +1,41 @@
+/* MiCarrusel.css */
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .custom-card {
+    width: 18rem;
+    margin: 20px;
+    position: relative;
+    overflow: hidden; /* Oculta el contenido que se desborda */
+  }
+  
+  .card-image {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s, filter 0.3s; /* Agrega transiciones para suavizar los efectos */
+  }
+  
+  .hovered .card-image {
+    transform: scale(1.1); /* Hace un zoom al pasar el ratón */
+    filter: brightness(70%); /* Oscurece la imagen de fondo */
+  }
+  
+  .card-text {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Ajusta el color del texto */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .hovered .card-text {
+    display: block;
+  }
+  

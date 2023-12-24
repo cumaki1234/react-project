@@ -2,20 +2,20 @@
 import Navbar from './components/NavBar';
 import BottomBar from './components/BottomBar';
 import RegistroUser from './components/RegistroUser';
-import Map from './components/Map';
+import MiCarrusel from './components/Carrusel';
+import Sidebar from './components/MenuAdministrador';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
- 
-
   return (
     <div>
     <Navbar />
-    <Map/>
-    {/*<RegistroUser/>*/}
+    <Sidebar/>
     <BottomBar />
   </div>
-    
   )
 }
+/* <RegistroUser/> */
 
 export default App
