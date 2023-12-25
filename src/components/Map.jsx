@@ -1,22 +1,73 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup,useMapEvent } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
-  const center = [-1.0241157747979186, -79.46108497663826]; // Coordenadas del centro del mapa
+  const [center, setCenter] = useState([-1.0241157747979186, -79.46108497663826]); // Coordenadas del centro del mapa
+  const [marker, setMarker] = useState(null);
+
+  const handleGetCurrentLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCenter([latitude, longitude]);
+        setMarker({ latitude, longitude });
+      },
+      (error) => {
+        console.error('Error getting current location:', error);
+      }
+    );
+  };
+
+  const handleCancel = () => {
+    setMarker(null);
+  };
+
+  const MapClickHandler = () => {
+    useMapEvent('click', (event) => {
+      if (!marker) {
+        const { lat, lng } = event.latlng;
+        setMarker({ latitude: lat, longitude: lng });
+      }
+    });
+
+    return null;
+  };
 
   return (
-    <MapContainer center={center} zoom={13} style={{ height: '300px', width: '10%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a> '
-      />
-      <Marker position={center}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
-    </MapContainer>
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '200px', marginRight: '10px' }}>
+        <h2>Ubicación Guardada</h2>
+        {marker && (
+          <ul>
+            <li>{`Latitud: ${marker.latitude.toFixed(4)}`}</li>
+            <li>{`Longitud: ${marker.longitude.toFixed(4)}`}</li>
+          </ul>
+        )}
+      </div>
+
+      <div>
+        <button onClick={handleGetCurrentLocation}>Obtener Ubicación Actual</button>
+        <button onClick={handleCancel}>Cancelar</button>
+
+        <MapContainer center={center} zoom={13} style={{ height: '400px', width: '100%' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+
+          <MapClickHandler />
+
+          {marker && (
+            <Marker position={[marker.latitude, marker.longitude]}>
+              <Popup>{`Latitud: ${marker.latitude.toFixed(4)}, Longitud: ${marker.longitude.toFixed(
+                4
+              )}`}</Popup>
+            </Marker>
+          )}
+        </MapContainer>
+      </div>
+    </div>
   );
 };
 

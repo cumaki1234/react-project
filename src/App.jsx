@@ -17,7 +17,7 @@ function App() {
 
     <Router>
     <NavBar />
-  
+
 
       <Routes>
         <Route path="/" element={<MiCarrusel/>}/>
