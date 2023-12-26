@@ -11,6 +11,7 @@ import LocationCard from './components/cards';
 import BottomBar2 from './components/BottomBar2';
 import MapUbiS from './components/MapaUbicacion';
 import EditarUser from './components/EditarUser';
+import RegistrationForm2 from './components/RegistroUser';
 
 function App() {
   return (
@@ -24,13 +25,13 @@ function App() {
       <Routes>
         <Route path="/" element={<MiCarrusel/>}/>
         <Route path="/Mapa" element={<Map/>} />
-        <Route path='/Registro' element={<RegistrationForm/>}/>
+        <Route path='/Registro' element={<RegistrationForm2/>}/>
         <Route path='/ubicacion' element={<LocationCard/>}/>
         <Route path='/ubicacionS' element={<MapUbiS/>}/>
         <Route path='/Perfil' element={<EditarUser/>}/>
     </Routes>
-   
     <BottomBar2/>
+
     </Router>
    
   </div>

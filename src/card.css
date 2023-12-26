@@ -1,4 +1,26 @@
-/* TuArchivoDeEstilos.css */
+
+
+.location-card-container {
+  display: flex;
+  height: 100vh; /* Establece la altura completa de la pantalla */
+  float: left;
+}
+
+.location-card-scroll {
+  overflow-y: auto; /* Agrega un scroll vertical si es necesario */
+  max-height: 100vh; /* Establece la altura máxima para la sección de las tarjetas */
+}
+
+.location-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-map {
+  flex: 1;
+}
+
+
 
 /*ESTILO PARA IMAGEN*/
 .card-title {

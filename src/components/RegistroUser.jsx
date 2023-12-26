@@ -1,157 +1,142 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+
+
 import Box from '@mui/material/Box';
+import { Form, Button } from 'react-bootstrap';
 
 import '../RegistroUser.css';
 
-const RegistroUsuario = () => {
+
+
+
+const RegistrationForm2= () => {
   const [formData, setFormData] = useState({
-    nombreusuario: '',
-    contrasena: '',
-    telefono: '',
-    confirmarContrasena: '',
-    identificacion: '',
-    correo: '',
-    nombre: '',
-    apellido: '',
+    username: '',
+    email: '',
+    password: '',
+    phone: '',
+    cedula: '',
+    firstName: '',
+    lastName: '',
+    optionalFields: {
+      razonSocial: '',
+      ruc: '',
+    },
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    
-
-    // Limpiar los campos después de enviar el formulario
-    setFormData({
-      nombreusuario: '',
-      contrasena: '',
-      telefono: '',
-      confirmarContrasena: '',
-      identificacion: '',
-      correo: '',
-      nombre: '',
-      apellido: '',
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission (e.g., send data to backend)
+    console.log('Form data submitted:', formData);
   };
-
-  const textFieldStyle = { marginBottom: '7px' }; // Ajusta este valor según sea necesario
 
   return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="username">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="email">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="password">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="phone">
+        <Form.Label>Phone</Form.Label>
+        <Form.Control
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="cedula">
+        <Form.Label>Cedula</Form.Label>
+        <Form.Control
+          type="text"
+          name="cedula"
+          value={formData.cedula}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="firstName">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="lastName">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      {/* Optional fields */}
+      <Form.Group controlId="razonSocial">
+        <Form.Label>Razon Social (Optional)</Form.Label>
+        <Form.Control
+          type="text"
+          name="optionalFields.razonSocial"
+          value={formData.optionalFields.razonSocial}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="ruc">
+        <Form.Label>RUC (Optional)</Form.Label>
+        <Form.Control
+          type="text"
+          name="optionalFields.ruc"
+          value={formData.optionalFields.ruc}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Register
+      </Button>
+s    </Form>
     
-    <Box className="container">
-      <Box className="form-container">
-        
-        <form onSubmit={handleSubmit}>
-          <TextField
-            style={textFieldStyle}
-            label="Nombre de Usuario"
-            type="text"
-            name="nombreusuario"
-            value={formData.nombreusuario}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.nombreusuario) }}
-          />
 
-          <TextField
-            style={textFieldStyle}
-            label="Contraseña"
-            type="password"
-            name="contrasena"
-            value={formData.contrasena}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.contrasena) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Confirmar Contraseña"
-            type="password"
-            name="confirmarContrasena"
-            value={formData.confirmarContrasena}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.confirmarContrasena) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Nombre"
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.nombre) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Apellido"
-            type="text"
-            name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.apellido) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Correo"
-            type="email"
-            name="correo"
-            value={formData.correo}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.correo) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Identificación"
-            type="text"
-            name="identificacion"
-            value={formData.identificacion}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.identificacion) }}
-          />
-
-          <TextField
-            style={textFieldStyle}
-            label="Teléfono"
-            type="tel"
-            name="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: Boolean(formData.telefono) }}
-          />
-          <Button type="submit" variant="contained" color="primary">
-            Registrarse
-          </Button>
-        </form>
-      </Box>
-    </Box>
   );
 };
 
-export default RegistroUsuario;
+export default RegistrationForm2;
+

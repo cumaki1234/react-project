@@ -10,7 +10,7 @@ const BottomBar2 = () => {
     <Tooltip id="tooltip">{text}</Tooltip>
   );
   return (
-    <Navbar fixed="bottom" className="bottom-bar">
+    <Navbar fixed="bottom" style={{ position: 'fixed', bottom: 0, width: '100%' }} className="bottom-bar">
     <Container>
       <Navbar.Brand className="bottom-bar-brand">
       <OverlayTrigger
