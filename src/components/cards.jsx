@@ -7,6 +7,7 @@ import { faMapMarkerAlt  } from '@fortawesome/free-solid-svg-icons';
 import '../card.css'
 import { Link } from 'react-router-dom';
 import MapUbiS from '../components/MapaUbicacion';
+import Map from './Map';
 
 
 
@@ -87,7 +88,7 @@ const LocationCard = () => {
 </div>
 {/* Sección del mapa */}
 <div className="location-map">
-        <MapUbiS markerCoordinates={markerCoordinates}/>
+<MapUbiS/>
       </div>
 
 </Container>
