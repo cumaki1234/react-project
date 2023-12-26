@@ -27,12 +27,7 @@ const RegistroUsuario = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Aquí puedes realizar la lógica de validación o envío del formulario
-
-    toast.success('Ingreso exitoso', {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 2000,
-    });
+    
 
     // Limpiar los campos después de enviar el formulario
     setFormData({
@@ -50,8 +45,10 @@ const RegistroUsuario = () => {
   const textFieldStyle = { marginBottom: '7px' }; // Ajusta este valor según sea necesario
 
   return (
+    
     <Box className="container">
       <Box className="form-container">
+        
         <form onSubmit={handleSubmit}>
           <TextField
             style={textFieldStyle}

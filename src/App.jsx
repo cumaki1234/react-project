@@ -1,13 +1,16 @@
 
-import NavBar from './components/NavBar';
-import BottomBar from './components/BottomBar';
 import RegistroUser from './components/RegistroUser';
 import MiCarrusel from './components/Carrusel';
 import Sidebar from './components/MenuAdministrador';
 import  Map  from './components/Map';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-
+import MyNavbar from './components/NavBar2';
+import RegistrationForm from './components/Registrousuario2'
+import LocationCard from './components/cards';
+import BottomBar2 from './components/BottomBar2';
+import MapUbiS from './components/MapaUbicacion';
+import EditarUser from './components/EditarUser';
 
 function App() {
   return (
@@ -16,17 +19,20 @@ function App() {
    <div>
 
     <Router>
-    <NavBar />
-
-
+ 
+    <MyNavbar/>
       <Routes>
         <Route path="/" element={<MiCarrusel/>}/>
-    <Route path="/otra" element={<Map/>} />
+        <Route path="/Mapa" element={<Map/>} />
+        <Route path='/Registro' element={<RegistrationForm/>}/>
+        <Route path='/ubicacion' element={<LocationCard/>}/>
+        <Route path='/ubicacionS' element={<MapUbiS/>}/>
+        <Route path='/Perfil' element={<EditarUser/>}/>
     </Routes>
    
-
+    <BottomBar2/>
     </Router>
-    <BottomBar />
+   
   </div>
  
 

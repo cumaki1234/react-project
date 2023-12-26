@@ -3,13 +3,17 @@ import { Carousel, Card } from 'react-bootstrap';
 import burguerImage from '../assets/images/burguer.png';
 import nose from '../assets/images/god1.jpg';
 import bestia from '../assets/images/prueba.jpg';
+
+import BottomBar2 from './BottomBar2';
 import '../MiCarrusel.css';
 
 function MiCarrusel() {
     const [hoveredCard, setHoveredCard] = useState(null);
 
     return (
+        
         <div>
+             
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -103,6 +107,7 @@ function MiCarrusel() {
                 </Card>
             </div>
             {/* Fin de Cards */}
+<BottomBar2/>
         </div>
     );
 }
