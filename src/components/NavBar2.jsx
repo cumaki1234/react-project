@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import logo from '../assets/images/descargar.jpg';
 import "../NavBar2.css"
-import { faUser, faBell,faShoppingCart,faMap, faBars   } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBell,faShoppingCart,faMap, faBars, faLock   } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
 
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Modal,Card, Alert   } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form,Container, FormControl, Button, Modal,Card, Alert   } from 'react-bootstrap';
 
-const MyNavbar = () => {
+const MyNavbar = (show, onHide) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [showProfileCard, setShowProfileCard] = useState(false);
@@ -80,7 +80,7 @@ const RegistrarUsuario=()=>{
 
     history('/');
   } 
-    
+   
   };
 
   return (
@@ -137,43 +137,60 @@ const RegistrarUsuario=()=>{
       
       </Navbar>
 
+
+
+
+
+
+
+
       {/* Login Modal */}
-      <Modal show={showLoginModal} onHide={handleLoginModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Iniciar Sesión</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Agrega aquí los campos para iniciar sesión */}
-          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-          <Form >
-            <Form.Group controlId="formBasicUser">
-              <Form.Label>Nombre de usuario</Form.Label>
-              <Form.Control  
-           type="text"
-           placeholder="Ingrese su nombre de usuario"
-           value={username}
-           onChange={(e) => setUsername(e.target.value)}
-               />
-            </Form.Group>
+      <Modal show={showLoginModal} onHide={handleLoginModalClose} centered >
+      <Modal.Header closeButton>
+        <Modal.Title className="centered-title">Iniciar sesión</Modal.Title>
+      </Modal.Header>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      <Modal.Body>
+        <Form>
+          <Form.Group controlId="formUsername">
+         
+            <Form.Label> 
+              Nombre de usuario:</Form.Label>
+            
+             
+            <Form.Control
+              type="text"
+              className="custom-input"
+              placeholder="Ingresa tu nombre de usuario"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            
+          </Form.Group>
+          
+          <Form.Group controlId="formPassword">
+            <Form.Label>Contraseña:</Form.Label>
+            <Form.Control
+            className="custom-input"
+              type="password"
+              
+              placeholder="Ingresa tu contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password"
-                placeholder="Ingrese su contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} />
-            </Form.Group>
+        <Button variant="primary" onClick={handleLogin} >
+          Iniciar sesión
+        </Button>
+     
+      </Modal.Footer>
+    </Modal>
 
-            <Button variant="primary" type="submit" onClick={handleLogin}>
-              Iniciar Sesión
-            </Button>
 
-            <Button variant="secondary" type="submit" onClick={RegistrarUsuario}>
-              Registrarse
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
 
 
         {/* Profile Card */}

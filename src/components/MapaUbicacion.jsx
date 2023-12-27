@@ -16,10 +16,12 @@ const MapUbiS = () => {
     { id: 3, position: [51.515, -0.11], content: 'Marcador 3' },
   ];
 
-  
+ 
+
 
   return (
-    <MapContainer center={center} zoom={13} style={{ height: '600px', width: '127%' }}>
+    <MapContainer center={center} zoom={13} style={{ height: '600px', width: '127%' }}
+>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

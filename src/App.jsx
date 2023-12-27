@@ -22,8 +22,9 @@ function App() {
     <Router>
  
     <MyNavbar/>
+   
       <Routes>
-        <Route path="/" element={<MiCarrusel/>}/>
+        <Route path="/" element={ <Sidebar/>}/>
         <Route path="/Mapa" element={<Map/>} />
         <Route path='/Registro' element={<RegistrationForm2/>}/>
         <Route path='/ubicacion' element={<LocationCard/>}/>
