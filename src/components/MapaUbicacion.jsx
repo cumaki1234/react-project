@@ -1,27 +1,43 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import burguer from '../assets/images/burguer.png';
 
+const MapUbiS = ({ sucursales, selectedMarker }) => {
+  const [markers, setMarkers] = useState([]);
 
-const MapUbiS = () => {
-  
-  const center = [51.505, -0.09]; // Latitud y longitud del centro del mapa
-
-  const markers = [
-    { id: 1, position: [51.505, -0.09], content: 'Marcador 1' },
-    { id: 2, position: [51.51, -0.1], content: 'Marcador 2' },
-    { id: 3, position: [51.515, -0.11], content: 'Marcador 3' },
-  ];
-
- 
-
+  useEffect(() => {
+    // Actualizar los marcadores
+    const newMarkers = sucursales
+      .filter((sucursal) => sucursal.id_ubicacion !== null)
+      .map((sucursal) => ({
+        id: sucursal.id_sucursal,
+        position: [
+          parseFloat(sucursal.id_ubicacion.latitud),
+          parseFloat(sucursal.id_ubicacion.longitud),
+        ],
+        content: sucursal.sdireccion || 'Sin dirección',
+      }));
+    setMarkers(newMarkers);
+  }, [sucursales]);
 
   return (
-    <MapContainer center={center} zoom={13} style={{ height: '600px', width: '127%' }}
->
+    <MapContainer center={[0, 0]} zoom={13} style={{ height: '600px', width: '127%' }}>
+      <LeafletMap markers={markers} selectedMarker={selectedMarker} />
+    </MapContainer>
+  );
+};
+
+const LeafletMap = ({ markers, selectedMarker }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedMarker) {
+      map.setView(selectedMarker, 25, { animate: true }); // Ajusta el valor de zoom según tus necesidades
+    }
+  }, [selectedMarker, map]);
+
+  return (
+    <>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -31,12 +47,13 @@ const MapUbiS = () => {
           <Popup>{marker.content}</Popup>
         </Marker>
       ))}
-    </MapContainer>
-    );
-  };
-  
-  
-
-  
+      {selectedMarker && (
+        <Marker position={selectedMarker}>
+          <Popup>Ubicación seleccionada</Popup>
+        </Marker>
+      )}
+    </>
+  );
+};
 
 export default MapUbiS;
