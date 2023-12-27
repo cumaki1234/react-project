@@ -7,91 +7,77 @@ import { faMapMarkerAlt  } from '@fortawesome/free-solid-svg-icons';
 import '../card.css'
 import { Link } from 'react-router-dom';
 import MapUbiS from '../components/MapaUbicacion';
-import Map from './Map';
-
+import BottomBar2 from './BottomBar2';
+import MyNavbar from './NavBar2'
 
 
 const LocationCard = () => {
+  const [sucursales, setSucursales] = useState([]);
   const [markerCoordinates, setMarkerCoordinates] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(null); // Nuevo estado
 
   const handleMarkerClick = (coordinates) => {
     setMarkerCoordinates(coordinates);
+    setSelectedMarker(coordinates); // Almacenar las coordenadas seleccionadas
   };
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/sucursal/sucusarleslist/')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.sucursales) {
+          setSucursales(data.sucursales);
+        } else {
+          console.error('Respuesta inesperada de la API de sucursales:', data);
+        }
+      })
+      .catch(error => console.error('Error al obtener la información de las sucursales:', error));
+  }, []);
 
   const cardImageStyle = {
-    height: '150px', // Establece la altura fija que desees
-    objectFit: 'cover', // Para cubrir la altura sin distorsionar la imagen
+    height: '150px',
+    objectFit: 'cover',
   };
+
   return (
     <Container className="location-card-container">
+    <MyNavbar/>
       <div className="location-card-scroll">
- <div className="location-card">
-    <Card style={{width: '18rem', margin: '10px'}} >
-      <Card.Img variant="top" src={god} alt="Imagen del lugar"
-       style={cardImageStyle} />
-      <Card.Body>
-      <Card.Title>Quevedo, Avda Walter Andrade frente a la Gasolinera La Chiquita</Card.Title>
-      <Card.Text>
-          Dirección del lugar y cualquier información adicional que desees.
-        </Card.Text>
-
-       
-        <div className="text-center">
-        <Button variant="primary" className="card-button" onClick={() => handleMarkerClick([-1.0156184261766825, -79.46708471010693])}>
-        <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> Encuéntranos        </Button>
+        <div className="location-card">
+          {sucursales.map((sucursal) => (
+            <Card key={sucursal.id_sucursal} style={{ width: '18rem', margin: '10px' }}>
+              <Card.Img
+                variant="top"
+                src={sucursal.imagensucursal}
+                alt={`Imagen de la sucursal ${sucursal.id_sucursal}`}
+                style={cardImageStyle}
+              />
+              <Card.Body>
+                <Card.Title>{sucursal.sdireccion}</Card.Title>
+                <Card.Text>
+                  Dirección de la sucursal y cualquier información adicional que desees.
+                </Card.Text>
+                <div className="text-center">
+                  <Button
+                    variant="primary"
+                    className="card-button"
+                    onClick={() => handleMarkerClick([
+                      parseFloat(sucursal.id_ubicacion.latitud),
+                      parseFloat(sucursal.id_ubicacion.longitud),
+                    ])}
+                  >
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> Encuéntranos
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          ))}
         </div>
-        
-      </Card.Body>
-      
-    </Card>
-  
-<Card style={{ width: '18rem', margin: '10px'}}   >
-<Card.Img variant="top" src={god2} alt="Imagen del lugar" 
- style={cardImageStyle}/>
-<Card.Body >
-<Card.Title   >Quevedo, Avda Walter Andrade frente a la Gasolinera La Chiquita</Card.Title>
-<Card.Text>
-    Dirección del lugar y cualquier información adicional que desees.
-  </Card.Text>
-
-
-  <div className="text-center">
-  <Button variant="primary" className="card-button" onClick={() => handleMarkerClick([-1.0156184261766825, -79.46708471010693])}>
-    <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> Encuéntranos
-  </Button>
-</div>
-
-
-</Card.Body>
-</Card>
-<Card style={{ width: '18rem', margin: '10px'}}   >
-<Card.Img variant="top" src={god2} alt="Imagen del lugar" 
- style={cardImageStyle}/>
-<Card.Body >
-<Card.Title   >Quevedo, Avda Walter Andrade frente a la Gasolinera La Chiquita</Card.Title>
-<Card.Text>
-    Dirección del lugar y cualquier información adicional que desees.
-  </Card.Text>
-
-
-  <div className="text-center">
-  <Button variant="primary" className="card-button" onClick={() => handleMarkerClick([-1.0156184261766825, -79.46708471010693])}>
-    <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> Encuéntranos
-  </Button>
-</div>
-
-
-</Card.Body>
-
-</Card>
-</div>
-</div>
-{/* Sección del mapa */}
-<div className="location-map">
-<MapUbiS/>
       </div>
-
-</Container>
+      <div className="location-map">
+  <MapUbiS sucursales={sucursales} selectedMarker={markerCoordinates} />
+</div>
+<BottomBar2/>
+    </Container>
   );
 };
 

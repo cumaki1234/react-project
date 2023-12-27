@@ -5,7 +5,6 @@ import Sidebar from './components/MenuAdministrador';
 import  Map  from './components/Map';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-import MyNavbar from './components/NavBar2';
 import RegistrationForm from './components/Registrousuario2'
 import LocationCard from './components/cards';
 import BottomBar2 from './components/BottomBar2';
@@ -21,7 +20,7 @@ function App() {
 
     <Router>
  
-    <MyNavbar/>
+  
    
       <Routes>
         <Route path="/" element={ <Sidebar/>}/>
@@ -31,7 +30,7 @@ function App() {
         <Route path='/ubicacionS' element={<MapUbiS/>}/>
         <Route path='/Perfil' element={<EditarUser/>}/>
     </Routes>
-    <BottomBar2/>
+   
 
     </Router>
    

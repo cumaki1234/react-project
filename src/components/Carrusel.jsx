@@ -3,8 +3,8 @@ import { Carousel, Card } from 'react-bootstrap';
 import burguerImage from '../assets/images/burguer.png';
 import nose from '../assets/images/god1.jpg';
 import bestia from '../assets/images/prueba.jpg';
-import MapUbiS from '../components/MapaUbicacion';
 import BottomBar2 from './BottomBar2';
+import MyNavbar from './NavBar2';
 import '../MiCarrusel.css';
 
 function MiCarrusel() {
@@ -13,7 +13,7 @@ function MiCarrusel() {
     return (
         
         <div>
-             
+             <MyNavbar/>
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -107,7 +107,7 @@ function MiCarrusel() {
                 </Card>
             </div>
             {/* Fin de Cards */}
-
+        <BottomBar2/>
         </div>
     );
 }

@@ -1,31 +1,60 @@
-// Sidebar.js
+// Importa las bibliotecas necesarias
 import React, { useState } from 'react';
-import { Card, Nav } from 'react-bootstrap';
-import '../Sidebar.css'; // Importa el CSS del Sidebar
+import { Layout, Menu } from 'antd';
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  HomeOutlined,
+  UserOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+
+const { Header, Sider, Content } = Layout;
 
 const Sidebar = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  // Estado para controlar la visibilidad del sidebar
+  const [collapsed, setCollapsed] = useState(false);
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  // Función para alternar la visibilidad del sidebar
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
   };
 
   return (
-    <Card className="sidebar">
-      <Card.Body>
-        <Nav className="flex-column">
-          <Nav.Link onClick={() => handleOptionClick('inventory')}>Gestión de Inventario</Nav.Link>
-          <hr className="sidebar-divider" />
-          <Nav.Link onClick={() => handleOptionClick('promotions')}>Gestión de Promociones</Nav.Link>
-          <hr className="sidebar-divider" />
-          <Nav.Link onClick={() => handleOptionClick('rewards')}>Gestión de Recompensas</Nav.Link>
-          <hr className="sidebar-divider" />
-          <Nav.Link onClick={() => handleOptionClick('products')}>Gestión de Productos</Nav.Link>
-          <hr className="sidebar-divider" />
-          <Nav.Link onClick={() => handleOptionClick('personnel')}>Gestión de Personal</Nav.Link>
-        </Nav>
-      </Card.Body>
-    </Card>
+    <Layout style={{ minHeight: '100vh' }}>
+      {/* Sidebar */}
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="logo" />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu.Item key="1" icon={<HomeOutlined />}>
+            <Link to="/">Inicio</Link>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<UserOutlined />}>
+            <Link to="/perfil">Perfil</Link>
+          </Menu.Item>
+          <Menu.Item key="3" icon={<SettingOutlined />}>
+            <Link to="/configuracion">Configuración</Link>
+          </Menu.Item>
+        </Menu>
+      </Sider>
+
+      {/* Contenido principal */}
+      <Layout className="site-layout">
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          {collapsed ? (
+            <MenuUnfoldOutlined className="trigger" onClick={toggleSidebar} />
+          ) : (
+            <MenuFoldOutlined className="trigger" onClick={toggleSidebar} />
+          )}
+        </Header>
+        <Content style={{ margin: '16px' }}>
+          {/* Contenido de tu aplicación */}
+          {/* Puedes colocar tus rutas y componentes aquí */}
+          Contenido de tu aplicación...
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 

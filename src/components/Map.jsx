@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup,useMapEvent } from 'react-leaflet';
-import MyNavbar from './NavBar2';
 import 'leaflet/dist/leaflet.css';
 import BottomBar2 from './BottomBar2';
+import MyNavbar from './NavBar2'
 
 const Map = () => {
   const [center, setCenter] = useState([-1.0241157747979186, -79.46108497663826]); // Coordenadas del centro del mapa
@@ -39,8 +39,8 @@ const Map = () => {
   return (
  
     <div style={{ display: 'flex', flexDirection: 'column' }}>
- 
-<div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <MyNavbar/>
+        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
 
          <div style={{ width: '200px', marginRight: '10px' }}>
          <h2>Ubicación Guardada</h2>
@@ -82,7 +82,7 @@ const Map = () => {
       </div>
      
     </div>
-    
+    <BottomBar2/>
     </div>
     
   );

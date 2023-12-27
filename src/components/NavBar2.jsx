@@ -53,7 +53,7 @@ const MyNavbar = (show, onHide) => {
     setShowProfileCard(!showProfileCard);
   };
 
-  const handleProfileCardClose = () => {
+  const CerrarCarta = () => {
     setShowProfileCard(false);
   };
 
@@ -62,12 +62,12 @@ const RegistrarUsuario=()=>{
   history('/Registro')
 }
 
-  const handleNavigateToProfile = () => {
+  const IrAlPerfil= () => {
     handleProfileCardClose();
     history('/Perfil'); // Reemplaza con la ruta de tu perfil
   };
 
-  const handleLogoutFromProfile = () => {
+  const CerrarSesion= () => {
     setLoggedIn(false);
     localStorage.setItem('isLoggedIn', 'false');
    // Obtén la ruta actual
@@ -195,7 +195,7 @@ const RegistrarUsuario=()=>{
 
         {/* Profile Card */}
         {isLoggedIn && (
-        <Modal show={showProfileCard} onHide={handleProfileCardClose}>
+        <Modal show={showProfileCard} onHide={CerrarCarta}>
           <Modal.Header closeButton>
             <Modal.Title>Perfil de Usuario</Modal.Title>
           </Modal.Header>
@@ -204,10 +204,10 @@ const RegistrarUsuario=()=>{
               {/* Agrega aquí los detalles del perfil del usuario */}
               <Card.Title>Bienvenido, Nombre de Usuario</Card.Title>
               {/* Agrega otros detalles del perfil aquí según tus necesidades */}
-              <Button variant="primary" onClick={handleNavigateToProfile}>
+              <Button variant="primary" onClick={IrAlPerfil}>
                 Ir a Perfil
               </Button>
-              <Button variant="danger" onClick={handleLogoutFromProfile}>
+              <Button variant="danger" onClick={CerrarSesion}>
                 Cerrar Sesion 
               </Button>
             </Card>
