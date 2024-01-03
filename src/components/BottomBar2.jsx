@@ -1,68 +1,57 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faUtensils } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { Container, Navbar,  OverlayTrigger, Tooltip } from 'react-bootstrap';
-import "../BottomBar2.css"
+// Importa las librerías necesarias
+import React, { useState } from 'react';
+import { Layout, Menu, Row, Col, Image, Dropdown, Button, Badge, theme, Breadcrumb,Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
+import {
+  MenuOutlined,
+  ShoppingOutlined,
+  EnvironmentOutlined, 
+  ReconciliationOutlined,
+  BellOutlined,
+  UserOutlined,
+  InstagramOutlined, 
+  FacebookOutlined, 
+  TwitterOutlined,
+} from '@ant-design/icons';
+
+
+import logo from '../assets/images/descargar.jpg'
+
+const { Header , Content, Footer } = Layout;
 
 const BottomBar2 = () => {
   const renderTooltip = (text) => (
     <Tooltip id="tooltip">{text}</Tooltip>
   );
   return (
-    <Navbar fixed="bottom" style={{ position: 'fixed', bottom: 0, width: '100%' }} className="bottom-bar">
-    <Container>
-      <Navbar.Brand className="bottom-bar-brand">
-      <OverlayTrigger
-            placement="top"
-            overlay={renderTooltip('Síguenos en Intagram')}
-          >
-            <a
-              href="https://www.instagram.com/alcarbonquevedo/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-        <FontAwesomeIcon icon={faInstagram}  className="bottom-bar-icon"/>
-        </a>
-        </OverlayTrigger>
-      </Navbar.Brand>
-      <Navbar.Brand className="bottom-bar-brand">
-      <OverlayTrigger
-            placement="top"
-            overlay={renderTooltip('Síguenos en Facebook')}
-          >
-            <a
-              href="https://www.facebook.com/profile.php?id=100082952421573&locale=es_LA"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-        <FontAwesomeIcon icon={faFacebook} className="bottom-bar-icon"/>
-        </a>
-        </OverlayTrigger>
-      </Navbar.Brand>
-      <Navbar.Brand className="bottom-bar-brand flex-fill text-center">
-      <OverlayTrigger
-            placement="top"
-            overlay={renderTooltip('Descargar menú')}
-          >
-        <FontAwesomeIcon icon={faUtensils} className="bottom-bar-icon"/>
+<Layout>
+    {/*BottomBar*/}
+<Footer style={{ textAlign: 'center', background: '#001529', color: 'white' }}
+>
+      <Row  justify="space-between" align="middle">
+        <Col>
+        <Tooltip title="Síguenos en Intagram">
+          <a href='/Registro' ><InstagramOutlined style={{ fontSize: '24px', color: '#e1306c' }} /></a>
+          </Tooltip>
+          
+          <Tooltip title="Síguenos en Facebook">
+          <FacebookOutlined style={{ fontSize: '24px', color: '#1877f2' }} />
+          </Tooltip>
+        </Col>
+        <Col>
+          
+          <ReconciliationOutlined  style={{ fontSize: '24px', color: '#1890ff' }} />
 
-        </OverlayTrigger>
-      </Navbar.Brand>
-      <Navbar.Brand className="bottom-bar-brand text-end">
-      <OverlayTrigger
-            placement="top"
-            overlay={renderTooltip('Encuéntranos')}
-          >
-      <a href="/ubicacion">
-      
-        <FontAwesomeIcon icon={faMapMarkerAlt} className="bottom-bar-icon"/>
-      </a>
-      </OverlayTrigger>
-      </Navbar.Brand>
-      
-    </Container>
-  </Navbar>
+        </Col>
+        <Col> 
+        <Tooltip title="Encuentranos">
+          <Link to='/Mapa'><EnvironmentOutlined style={{ fontSize: '24px', color: '#52c41a' }} /></Link>
+        </Tooltip>
+        </Col>
+      </Row>
+
+    </Footer>
+    </Layout>
   );
 };
 

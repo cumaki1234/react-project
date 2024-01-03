@@ -1,221 +1,148 @@
 import React, { useState } from 'react';
+import { Layout, Menu,Drawer, Badge, Modal, Space, Avatar } from 'antd';
+import { Link } from 'react-router-dom';
+import {
+  MenuOutlined,
+  ShoppingOutlined,
+  BellOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import LoginForm from './Login';
 import logo from '../assets/images/descargar.jpg';
-import "../NavBar2.css"
-import { faUser, faBell,faShoppingCart,faMap, faBars, faLock   } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
 
+const { Header } = Layout;
 
-import { Navbar, Nav, NavDropdown, Form,Container, FormControl, Button, Modal,Card, Alert   } from 'react-bootstrap';
-
-const MyNavbar = (show, onHide) => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
-  const [showProfileCard, setShowProfileCard] = useState(false);
-  const history = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-
-  const handleLoginClick = () => {
-
-    setShowLoginModal(true);
+const Navbar = ({ cartTotal } ) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
   };
 
-  const handleLoginModalClose = () => {
-    setShowLoginModal(false);
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // Previene la recarga de la página por defecto
-
-
-    if (!username || !password) {
-      setErrorMessage('Por favor, completa todos los campos.');
-      return;
-    }
-
-
-    // Aquí deberías implementar la lógica de autenticación, por ejemplo, verificar con una base de datos.
-    // Simplemente marcaré al usuario como "iniciado sesión" en este ejemplo.
-    setLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
-
-    handleLoginModalClose();
+  const handleLogin = (userData) => {
+    // Manejar la lógica de inicio de sesión y establecer isLoggedIn en true
+    setIsLoggedIn(true);
+    // Puedes realizar otras acciones necesarias después del inicio de sesión
+    console.log('Usuario ha iniciado sesión:', userData);
   };
 
 
+  const [cart, setCart] = useState([]);
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
-
-  const handleProfileClick = () => {
-    setShowProfileCard(!showProfileCard);
+  const showDrawer = () => {
+    setDrawerVisible(true);
   };
 
-  const CerrarCarta = () => {
-    setShowProfileCard(false);
+  const onClose = () => {
+    setDrawerVisible(false);
   };
 
+  const handleAddToCart = (product) => {
+  setCart((prevCart) => [...prevCart, product]);
+};
 
-const RegistrarUsuario=()=>{
-  history('/Registro')
-}
-
-  const IrAlPerfil= () => {
-    handleProfileCardClose();
-    history('/Perfil'); // Reemplaza con la ruta de tu perfil
-  };
-
-  const CerrarSesion= () => {
-    setLoggedIn(false);
-    localStorage.setItem('isLoggedIn', 'false');
-   // Obtén la ruta actual
-    const currentPath = window.location.pathname;
-  
-
-  // Redirige solo si no estás en la página principal
-  if (currentPath !== "/") {
- 
-
-    history('/');
-  } 
-   
-  };
 
   return (
-    <>
-      <Navbar className="my-custom-navbar" expand="lg">
-        <Navbar.Brand href="/" >
-          <img
-            src={logo}
-            width="30"
-            height="30"
-            className="logo"
-            alt="Company Logo"
-          />
-     
-        </Navbar.Brand>
-     
-        <Navbar.Toggle aria-controls="basic-navbar-nav">
-        <div className="icon-container">
-            <FontAwesomeIcon icon={faBars} />
-          </div>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-       
-            <Nav.Link href="#menu">Menu</Nav.Link>
-            <Nav.Link href="#reservaciones">Reservaciones</Nav.Link>
-            <Nav.Link href="#puntos">Puntos</Nav.Link>
-        
-       
-        
-          <Nav.Link href="#carrito" className="mr-2">
-            <div className="icon-container">
-              <FontAwesomeIcon icon={faShoppingCart}/>
-            </div>
-          </Nav.Link>
-         
-         <Nav.Link onClick={isLoggedIn ? handleProfileClick : handleLoginClick} className="mr-2">
-            <FontAwesomeIcon icon={faUser} />
-            {isLoggedIn ? ' Perfil' : ' Iniciar Sesión'}
-          </Nav.Link>
-            
-            {isLoggedIn && <Nav.Link href="/Mapa" className="mr-2">
-              <FontAwesomeIcon icon={faMap} />
-            </Nav.Link>}
-          
-          <div className="icon-container">
-            <Nav.Link href="#campanita" className="mr-2">
-            
-              <FontAwesomeIcon icon={faBell} />
-           
-            </Nav.Link>
-          </div>
-        
-        </Navbar.Collapse>
-      
-      </Navbar>
-
-
-
-
-
-
-
-
-      {/* Login Modal */}
-      <Modal show={showLoginModal} onHide={handleLoginModalClose} centered >
-      <Modal.Header closeButton>
-        <Modal.Title className="centered-title">Iniciar sesión</Modal.Title>
-      </Modal.Header>
-      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-      <Modal.Body>
-        <Form>
-          <Form.Group controlId="formUsername">
-         
-            <Form.Label> 
-              Nombre de usuario:</Form.Label>
-            
-             
-            <Form.Control
-              type="text"
-              className="custom-input"
-              placeholder="Ingresa tu nombre de usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+    <Layout>
+      {/* NavBar */}
+      <Header className="flex items-center">
+        <div className="flex items-center">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ height: '32px', margin: '16px', borderRadius: '50%' }}
             />
-            
-          </Form.Group>
-          
-          <Form.Group controlId="formPassword">
-            <Form.Label>Contraseña:</Form.Label>
-            <Form.Control
-            className="custom-input"
-              type="password"
-              
-              placeholder="Ingresa tu contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
+          </Link>
+          <span className="text-white">Hamburguesas al carbón</span>
+        </div>
 
-        <Button variant="primary" onClick={handleLogin} >
-          Iniciar sesión
-        </Button>
-     
-      </Modal.Footer>
-    </Modal>
-
-
-
-
-        {/* Profile Card */}
-        {isLoggedIn && (
-        <Modal show={showProfileCard} onHide={CerrarCarta}>
-          <Modal.Header closeButton>
-            <Modal.Title>Perfil de Usuario</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Card>
-              {/* Agrega aquí los detalles del perfil del usuario */}
-              <Card.Title>Bienvenido, Nombre de Usuario</Card.Title>
-              {/* Agrega otros detalles del perfil aquí según tus necesidades */}
-              <Button variant="primary" onClick={IrAlPerfil}>
-                Ir a Perfil
-              </Button>
-              <Button variant="danger" onClick={CerrarSesion}>
-                Cerrar Sesion 
-              </Button>
-            </Card>
-          </Modal.Body>
-        </Modal>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          className="flex-1 min-w-0 justify-end"
+        >
+          <Menu.Item key="1">Menú</Menu.Item>
+          <Menu.Item key="2">Reservaciones</Menu.Item>
+          <Menu.Item key="3" onClick={showDrawer}>
+            <Badge count={cartTotal} size="small">
+              <ShoppingOutlined className="text-white" />
+            </Badge>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <BellOutlined className="text-white" />
+          </Menu.Item>
+          <Menu.Item key="5" onClick={showModal}>
+            <Space>
+              <Avatar icon={<UserOutlined />} />
+              <span>Iniciar Sesión</span>
+            </Space>
+          </Menu.Item>
+          {isLoggedIn && (
+          <>
+            <Menu.Item key="6">
+              <Link to="/perfil">
+                <UserOutlined className="text-white" />
+                <span>Perfil</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="7">
+              <Link to="/configuracion">
+                <SettingOutlined className="text-white" />
+                <span>Configuración</span>
+              </Link>
+            </Menu.Item>
+            </>
         )}
-    </>
+        {console.log(isLoggedIn)}
+        </Menu>
+      </Header>
+
+      {/* Agregar el modal */}
+      <Modal
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        width="400px"
+        
+      >
+        {/* Agregar el contenido del modal aquí */}
+        {/* Puedes incluir formularios, campos de usuario y contraseña, etc. */}
+        <LoginForm />
+      </Modal>
+
+ {/* Drawer para mostrar los detalles del carrito */}
+ <Drawer
+        title="Detalles del Carrito"
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        visible={drawerVisible}
+      >
+        {/* Aquí puedes mostrar los detalles del carrito */}
+        {cart.map((product) => (
+          <div key={product.id}>
+            <p>{product.name}</p>
+            <p>Cantidad: {product.quantity}</p>
+            <p>Precio unitario: ${product.price.toFixed(2)}</p>
+            {/* Agrega más detalles según sea necesario */}
+          </div>
+        ))}
+        {/* Puedes mostrar el total, botones de checkout, etc. */}
+        <p>Total: ${cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2)}</p>
+        <button onClick={onClose}>Cerrar</button>
+      </Drawer>
+
+
+      
+    </Layout>
   );
 };
 
-export default MyNavbar;
+export default Navbar;

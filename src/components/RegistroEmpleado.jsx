@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import '../EstiloRegistroEmpleados.css';
-import BottomBar2 from './BottomBar2'
-import MyNavbar from './NavBar2'
+
 
 
 const RegistroEmpleado = () => {

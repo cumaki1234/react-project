@@ -9,10 +9,36 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import logo from '../assets/images/descargar.jpg';
+import CrearTipoProducto from '../components/CrearTipoProducto';
+import AvisosPrincipalesAdmin from '../components/AvisosPrincipalesAdmin';
+import CrearCategoria from '../components/CrearCategoria';
 
 const { Header, Sider, Content } = Layout;
 
 const Sidebar = () => {
+
+//PATANADA DED CHATGPT
+  const [selectedMenuItem, setSelectedMenuItem] = useState('1');
+
+  const handleMenuClick = (key) => {
+    setSelectedMenuItem(key);
+  };
+
+  const renderContent = () => {
+    switch (selectedMenuItem) {
+      case '1':
+        return <AvisosPrincipalesAdmin/>;
+      case '2':
+        return <CrearTipoProducto/>;
+      case '3':
+        return <CrearCategoria/>;
+      default:
+        return null;
+    }
+  };
+//AQUI TERMINA LA PATANADA
+
   // Estado para controlar la visibilidad del sidebar
   const [collapsed, setCollapsed] = useState(false);
 
@@ -25,8 +51,14 @@ const Sidebar = () => {
     <Layout style={{ minHeight: '100vh' }}>
       {/* Sidebar */}
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+      <div className="logo">
+          <img src={logo} alt="Logo" style={{ height: '32px', margin: '16px', borderRadius: '50%' }} />
+        </div>
+        <Menu theme="dark" mode="inline" 
+        selectedKeys={[selectedMenuItem]}
+        onClick={({ key }) => handleMenuClick(key)}
+        defaultSelectedKeys={['1']}>
+
           <Menu.Item key="1" icon={<HomeOutlined />}>
             <Link to="/">Inicio</Link>
           </Menu.Item>
@@ -41,17 +73,20 @@ const Sidebar = () => {
 
       {/* Contenido principal */}
       <Layout className="site-layout">
+     
         <Header className="site-layout-background" style={{ padding: 0 }}>
           {collapsed ? (
-            <MenuUnfoldOutlined className="trigger" onClick={toggleSidebar} />
+            <MenuUnfoldOutlined className="trigger" 
+            style={{ color: '#fff' }}
+            onClick={toggleSidebar} />
           ) : (
-            <MenuFoldOutlined className="trigger" onClick={toggleSidebar} />
+            <MenuFoldOutlined className="trigger" 
+            style={{ color: '#fff' }}
+            onClick={toggleSidebar} />
           )}
         </Header>
         <Content style={{ margin: '16px' }}>
-          {/* Contenido de tu aplicación */}
-          {/* Puedes colocar tus rutas y componentes aquí */}
-          Contenido de tu aplicación...
+        {renderContent()}
         </Content>
       </Layout>
     </Layout>

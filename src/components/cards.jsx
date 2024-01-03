@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-import { Card, Button, Row,Col,Container } from 'react-bootstrap';
-import god from '../assets/images/god3.jpg';
-import god2 from '../assets/images/god1.jpg';
+import React, { useState, useEffect } from 'react';
+import { Card, Button, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt  } from '@fortawesome/free-solid-svg-icons';
-import '../card.css'
-import { Link } from 'react-router-dom';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import MapUbiS from '../components/MapaUbicacion';
-import BottomBar2 from './BottomBar2';
-import MyNavbar from './NavBar2'
-
 
 const LocationCard = () => {
   const [sucursales, setSucursales] = useState([]);
@@ -40,7 +33,6 @@ const LocationCard = () => {
 
   return (
     <Container className="location-card-container">
-    <MyNavbar/>
       <div className="location-card-scroll">
         <div className="location-card">
           {sucursales.map((sucursal) => (
@@ -76,9 +68,8 @@ const LocationCard = () => {
       <div className="location-map">
   <MapUbiS sucursales={sucursales} selectedMarker={markerCoordinates} />
 </div>
-<BottomBar2/>
+
     </Container>
   );
 };
-
 export default LocationCard;

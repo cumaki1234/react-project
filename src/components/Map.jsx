@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup,useMapEvent } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import BottomBar2 from './BottomBar2';
-import MyNavbar from './NavBar2'
+/*import BottomBar2 from './BottomBar2';*/
 
 const Map = () => {
   const [center, setCenter] = useState([-1.0241157747979186, -79.46108497663826]); // Coordenadas del centro del mapa
@@ -39,7 +38,7 @@ const Map = () => {
   return (
  
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <MyNavbar/>
+ 
         <div style={{ display: 'flex', alignItems: 'flex-start' }}>
 
          <div style={{ width: '200px', marginRight: '10px' }}>
@@ -61,7 +60,7 @@ const Map = () => {
         <button onClick={handleGetCurrentLocation}>Obtener Ubicación Actual</button>
         <button onClick={handleCancel}>Cancelar</button>
       
-        <MapContainer center={center} zoom={13} style={{ height: '500px', width: '380%' }}>
+        <MapContainer center={center} zoom={13} style={{ height: '500px', width: '300%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -82,7 +81,7 @@ const Map = () => {
       </div>
      
     </div>
-    <BottomBar2/>
+   
     </div>
     
   );
